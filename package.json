@@ -1,0 +1,70 @@
+{
+  "name": "andela-challenge5",
+  "version": "1.0.0",
+  "main": "app.js",
+  "engines": {
+    "node": "12.16.x"
+  },
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "serve": "nodemon ./dist/app.js",
+    "watch": "watch 'npm run build' src",
+    "prebuild": "rimraf dist",
+    "build": "babel src -d dist --ignore '**/*.test.js'",
+    "postbuild": "mkdir dist/logs && touch dist/logs/access.log",
+    "test": "jest --watchAll",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "Uwem Akan Nkereuwem",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.9.0",
+    "@babel/preset-env": "7.9.5",
+    "babel-jest": "25.3.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-base": "14.1.0",
+    "eslint-plugin-import": "2.20.2",
+    "jest": "25.3.0",
+    "rimraf": "3.0.2",
+    "watch": "1.0.2"
+  },
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "body-parser-xml": "2.0.0",
+    "chalk": "4.0.0",
+    "debug": "4.1.1",
+    "express": "4.17.1",
+    "jsontoxml": "1.0.1",
+    "morgan": "1.10.0",
+    "nodemon": "2.0.3"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ],
+    "testPathIgnorePatterns": [
+      "dist"
+    ]
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node-modules/**/node_modules"
+    ],
+    "delay": "2500",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 4500
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UWEMAKAN/andela-challenge5.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UWEMAKAN/andela-challenge5/issues"
+  },
+  "homepage": "https://github.com/UWEMAKAN/andela-challenge5#readme",
+  "description": ""
+}
