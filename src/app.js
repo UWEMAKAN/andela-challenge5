@@ -17,7 +17,7 @@ app.use(morgan((tokens, req, res) => [
   tokens.method(req, res),
   tokens.url(req, res),
   tokens.status(req, res),
-  `${Math.trunc(tokens['response-time'](req, res))}ms`
+  `${Math.round(tokens['response-time'](req, res))}ms`
 ].join('\t\t'), {
   stream: accessLogStream,
   skip: (req, res) => res.statusCode === 404 || req.originalUrl === '/' || req.path === '/logs'
