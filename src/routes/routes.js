@@ -42,10 +42,10 @@ function router() {
     .get((req, res) => {
       fs.readFile(path.join(global.appRoot, './logs/access.log'), { encoding: 'utf8', flag: 'r' }, (err, data) => {
         if (err) {
-          // log(err);
           res.status(404);
           return res.send('Ooops! resource not found');
         }
+        res.set('Content-Type', 'text/plain');
         return res.send(data);
       });
     });
