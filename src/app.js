@@ -20,7 +20,7 @@ app.use(morgan((tokens, req, res) => [
   `${Math.round(tokens['response-time'](req, res))}ms`
 ].join('\t\t'), {
   stream: accessLogStream,
-  skip: (req, res) => res.statusCode === 404 || req.originalUrl === '/' || req.path === '/logs'
+  skip: (req, res) => res.statusCode === 404 || req.originalUrl === '/'
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
