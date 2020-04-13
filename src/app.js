@@ -13,11 +13,13 @@ global.appRoot = path.resolve(__dirname);
 const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/accessLog.txt'), { flags: 'a' });
 
 morgan.token('time', (tokens, req, res) => {
-  let responseTime = `${Math.round(tokens['response-time'](req, res))}`;
-  if (responseTime.length < 2) {
-    responseTime = `0${responseTime}`;
-  }
-  return `${responseTime}ms`;
+  let responseTime = Math.round(tokens['response-time'](req, res));
+  if (responseTime > 10) responseTime = 9;
+  responseTime = `${responseTime}`;
+  // if (responseTime.length < 2) {
+  //   responseTime = `0${responseTime}`;
+  // }
+  return `0${responseTime}ms`;
 });
 morgan.token('path', (tokens, req, res) => {
   let requestPath = `${tokens.url(req, res)}`;
