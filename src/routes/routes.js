@@ -40,7 +40,7 @@ function router() {
 
   apiRouter.route('/logs')
     .get((req, res) => {
-      fs.readFile(path.join(global.appRoot, './logs/accessLog.txt'), { encoding: 'utf8', flag: 'r' }, (err, data) => {
+      fs.readFile(path.join(global.appRoot, './logs/access.log'), { encoding: 'utf8', flag: 'r' }, (err, data) => {
         if (err) {
           res.status(404);
           return res.send('Ooops! resource not found');

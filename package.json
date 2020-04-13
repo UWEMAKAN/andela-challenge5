@@ -11,7 +11,7 @@
     "watch": "watch 'npm run build' src",
     "prebuild": "rimraf dist",
     "build": "babel src -d dist --ignore '**/*.test.js'",
-    "postbuild": "mkdir dist/logs && touch dist/logs/accessLog.txt",
+    "postbuild": "mkdir dist/logs && touch dist/logs/access.log",
     "test": "jest --watchAll",
     "heroku-postbuild": "npm run build"
   },

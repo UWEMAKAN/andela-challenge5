@@ -10,16 +10,14 @@ import apiRoutes from './routes/routes';
 
 bodyParserXml(bodyParser);
 global.appRoot = path.resolve(__dirname);
-const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/accessLog.txt'), { flags: 'a' });
+const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/access.log'), { flags: 'a' });
 
 morgan.token('time', (tokens, req, res) => {
-  let responseTime = Math.round(tokens['response-time'](req, res));
-  if (responseTime > 10) responseTime = 9;
-  responseTime = `${responseTime}`;
-  // if (responseTime.length < 2) {
-  //   responseTime = `0${responseTime}`;
-  // }
-  return `0${responseTime}ms`;
+  let responseTime = `${Math.round(tokens['response-time'](req, res))}`;
+  if (responseTime.length < 2) {
+    responseTime = `0${responseTime}`;
+  }
+  return `${responseTime}ms`;
 });
 morgan.token('path', (tokens, req, res) => {
   let requestPath = `${tokens.url(req, res)}`;
@@ -27,6 +25,14 @@ morgan.token('path', (tokens, req, res) => {
     requestPath = requestPath.slice(0, requestPath.length - 1);
   }
   return requestPath;
+
+  // let responseTime = Math.round(tokens['response-time'](req, res));
+  // if (responseTime > 10) responseTime = 9;
+  // responseTime = `${responseTime}`;
+  // // if (responseTime.length < 2) {
+  // //   responseTime = `0${responseTime}`;
+  // // }
+  // return `${responseTime}ms`;
 });
 
 const app = express();
