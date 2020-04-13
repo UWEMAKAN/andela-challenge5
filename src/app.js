@@ -19,11 +19,18 @@ morgan.token('time', (tokens, req, res) => {
   }
   return `${responseTime}ms`;
 });
+morgan.token('path', (tokens, req, res) => {
+  let requestPath = `${tokens.url(req, res)}`;
+  if (requestPath.endsWith('/')) {
+    requestPath = requestPath.slice(0, requestPath.length - 1);
+  }
+  return requestPath;
+});
 
 const app = express();
 app.use(morgan((tokens, req, res) => [
   tokens.method(req, res),
-  tokens.url(req, res),
+  tokens.path(tokens, req, res),
   tokens.status(req, res),
   tokens.time(tokens, req, res)
 ].join('\t\t'), {
