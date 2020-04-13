@@ -45,8 +45,7 @@ function router() {
           res.status(404);
           return res.send('Ooops! resource not found');
         }
-        // res.type('text/plain');
-        res.set('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'text/plain');
         return res.send(data);
       });
     });
