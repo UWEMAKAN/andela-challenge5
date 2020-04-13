@@ -12,12 +12,20 @@ bodyParserXml(bodyParser);
 global.appRoot = path.resolve(__dirname);
 const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/access.log'), { flags: 'a' });
 
+morgan.token('time', (tokens, req, res) => {
+  let responseTime = `${Math.round(tokens['response-time'](req, res))}`;
+  if (responseTime.length < 2) {
+    responseTime = `0${responseTime}`;
+  }
+  return `${responseTime}ms`;
+});
+
 const app = express();
 app.use(morgan((tokens, req, res) => [
   tokens.method(req, res),
   tokens.url(req, res),
   tokens.status(req, res),
-  `${Math.round(tokens['response-time'](req, res))}ms`
+  tokens.time(tokens, req, res)
 ].join('\t\t'), {
   stream: accessLogStream,
   skip: (req, res) => res.statusCode === 404 || req.originalUrl === '/'
