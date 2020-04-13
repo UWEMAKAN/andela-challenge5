@@ -10,7 +10,7 @@ import apiRoutes from './routes/routes';
 
 bodyParserXml(bodyParser);
 global.appRoot = path.resolve(__dirname);
-const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/access.log'), { flags: 'a' });
+const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/accessLog.txt'), { flags: 'a' });
 
 morgan.token('time', (tokens, req, res) => {
   let responseTime = `${Math.round(tokens['response-time'](req, res))}`;
