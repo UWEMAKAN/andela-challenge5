@@ -10,7 +10,7 @@ import apiRoutes from './routes/routes';
 
 bodyParserXml(bodyParser);
 global.appRoot = path.resolve(__dirname);
-const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/access.log'), { flags: 'a' });
+const accessLogStream = fs.createWriteStream(path.join(__dirname, '/logs/access.log'), { flags: 'a' });
 
 morgan.token('time', (tokens, req, res) => {
   let responseTime = `${Math.round(tokens['response-time'](req, res))}`;
@@ -25,13 +25,9 @@ morgan.token('path', (tokens, req, res) => {
     requestPath = requestPath.slice(0, requestPath.length - 1);
   }
   return requestPath;
-
   // let responseTime = Math.round(tokens['response-time'](req, res));
   // if (responseTime > 10) responseTime = 9;
   // responseTime = `${responseTime}`;
-  // // if (responseTime.length < 2) {
-  // //   responseTime = `0${responseTime}`;
-  // // }
   // return `${responseTime}ms`;
 });
 
@@ -52,23 +48,22 @@ app.use(bodyParser.xml({
     normalize: true,
     normalizeTags: false,
     explicitArray: false,
-    // eslint-disable-next-line no-unused-vars
-    valueProcessors: [(value, name) => Number.parseFloat(value) || value]
+    valueProcessors: [(value) => Number.parseFloat(value) || value]
   }
 }));
 
 const PORT = process.env.PORT || 4000;
-export const server = http.createServer(app);
 
 app.use('/api/v1/on-covid-19', apiRoutes);
 
-app.get('/', (req, res) => res.send('Running http server'));
+app.get('/', (req, res) => res.send('Up and Running'));
 
 app.all('*', (req, res) => {
   res.status(404);
   return res.send('Ooops! Not Found!!!');
 });
 
+export const server = http.createServer(app);
 server.listen(PORT, () => {
   debug(`Listening on port ${PORT}`);
 });

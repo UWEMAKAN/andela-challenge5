@@ -27,6 +27,7 @@
     "eslint-plugin-import": "2.20.2",
     "jest": "25.3.0",
     "rimraf": "3.0.2",
+    "supertest": "4.0.2",
     "watch": "1.0.2"
   },
   "dependencies": {
@@ -40,9 +41,6 @@
     "nodemon": "2.0.3"
   },
   "jest": {
-    "modulePathIgnorePatterns": [
-      "<rootDir>/dist/"
-    ],
     "testPathIgnorePatterns": [
       "dist"
     ]

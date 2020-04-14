@@ -1,4 +1,4 @@
-import { expectedData, expectedRegion } from './constants/constants';
+import { expectedData, expectedRegion } from '../constants/constants';
 import covid19ImpactEstimator from '../estimator/estimator';
 
 export const checkCompleteData = (data, expectedInput) => {
