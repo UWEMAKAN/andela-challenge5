@@ -6,6 +6,7 @@ import debug from 'debug';
 import bodyParser from 'body-parser';
 import bodyParserXml from 'body-parser-xml';
 import morgan from 'morgan';
+import cors from 'cors';
 import apiRoutes from './routes/routes';
 
 bodyParserXml(bodyParser);
@@ -51,6 +52,7 @@ app.use(bodyParser.xml({
     valueProcessors: [(value) => Number.parseFloat(value) || value]
   }
 }));
+app.use(cors());
 
 const PORT = process.env.PORT || 4000;
 
